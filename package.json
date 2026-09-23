@@ -1,0 +1,92 @@
+{
+  "name": "@airmrcr/gitx",
+  "version": "0.1.0",
+  "description": "Wrangle many git repositories at once, in parallel, without losing your mind.",
+  "keywords": [
+    "cli",
+    "git",
+    "github",
+    "gitlab",
+    "repo",
+    "repository",
+    "workspace"
+  ],
+  "homepage": "https://github.com/airmrcr/gitx",
+  "bugs": {
+    "url": "https://github.com/airmrcr/gitx/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "airmrcr",
+    "url": "https://github.com/airmrcr"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/airmrcr/gitx.git"
+  },
+  "funding": [
+    {
+      "type": "individual",
+      "url": "https://github.com/sponsors/airmrcr"
+    },
+    {
+      "type": "patreon",
+      "url": "https://www.patreon.com/airmrcr"
+    }
+  ],
+  "bin": {
+    "gitx": "./bin/gitx.js"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "!dist/**/*.tsbuildinfo"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "clean": "node -e \"fs.rmSync('dist',{recursive:true,force:true})\"",
+    "dev": "tsc -p tsconfig.build.json --watch",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "lint": "oxlint --fix",
+    "lint:check": "oxlint",
+    "prepack": "pnpm clean && pnpm build",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest",
+    "type:check": "tsc -p tsconfig.json --noEmit",
+    "verify": "pnpm lint:check && pnpm format:check && pnpm type:check && pnpm test"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.8.1",
+    "cli-truncate": "^6.1.1",
+    "commander": "^15.0.0",
+    "log-update": "^8.0.0",
+    "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "@vitest/coverage-v8": "^5.0.1",
+    "eslint-plugin-import-x": "^4.17.1",
+    "oxfmt": "^0.70.0",
+    "oxlint": "^1.85.0",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.1"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "packageManager": "pnpm@12.8.1"
+}

@@ -1,0 +1,95 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["import", "node", "promise", "unicorn", "typescript", "oxc", "vitest"],
+  "jsPlugins": [{ "name": "import-x-js", "specifier": "eslint-plugin-import-x" }],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "perf": "error",
+    "pedantic": "warn"
+  },
+  "env": {
+    "es2024": true,
+    "node": true
+  },
+  "rules": {
+    "no-console": "off",
+    "no-redeclare": "off",
+    "require-await": "off",
+    "max-classes-per-file": "off",
+    "no-promise-executor-return": "off",
+    "no-await-in-loop": "off",
+    "max-lines": "off",
+    "max-lines-per-function": "off",
+    "no-inline-comments": "off",
+    "require-unicode-regexp": "off",
+    "import/max-dependencies": "off",
+    "unicorn/no-null": "off",
+    "unicorn/no-useless-undefined": "off",
+    "unicorn/prefer-number-coercion": "off",
+    "unicorn/prefer-top-level-await": "off",
+    "unicorn/no-process-exit": "off",
+    "unicorn/prefer-string-raw": "off",
+    "typescript/consistent-type-imports": [
+      "error",
+      {
+        "disallowTypeAnnotations": true,
+        "fixStyle": "inline-type-imports",
+        "prefer": "type-imports"
+      }
+    ],
+    "typescript/no-explicit-any": "error",
+    "typescript/explicit-function-return-type": "off",
+    "promise/prefer-await-to-then": "error",
+    "import/no-cycle": "error",
+    "import/first": "error",
+    "import/no-duplicates": ["error", { "preferInline": true }]
+  },
+  "overrides": [
+    {
+      "files": ["bin/*.js"],
+      "rules": {
+        "import/no-unassigned-import": "off"
+      }
+    },
+    {
+      "files": ["**/*.ts"],
+      "rules": {
+        "import-x-js/no-extraneous-dependencies": [
+          "error",
+          {
+            "devDependencies": false,
+            "optionalDependencies": false,
+            "peerDependencies": false,
+            "includeInternal": false,
+            "includeTypes": false
+          }
+        ],
+        "import-x-js/order": [
+          "error",
+          {
+            "alphabetize": { "order": "asc", "caseInsensitive": true },
+            "named": true,
+            "newlines-between": "never"
+          }
+        ]
+      }
+    },
+    {
+      "files": ["test/**/*.ts", "*.config.ts"],
+      "rules": {
+        "import-x-js/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+      }
+    },
+    {
+      "files": ["test/**/*.ts"],
+      "rules": {
+        "typescript/no-explicit-any": "off",
+        "typescript/no-non-null-assertion": "off",
+        "unicorn/no-await-expression-member": "off",
+        "vitest/no-conditional-in-test": "off"
+      }
+    }
+  ],
+  "ignorePatterns": ["dist/**", "coverage/**", "node_modules/**"]
+}
